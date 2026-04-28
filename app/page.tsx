@@ -145,9 +145,20 @@ export default function Home() {
     <button
       type="button"
       onClick={async () => {
-        const res = await fetch('/api/checkout', { method: 'POST' });
-        const data = await res.json();
-        if (data?.url) window.open(data.url, '_blank');
+        try {
+          const res = await fetch('/api/checkout', { method: 'POST' });
+          if (!res.ok) throw new Error(`Checkout request failed: ${res.status}`);
+          const data = await res.json();
+          const url = data?.url;
+          if (typeof url === 'string' && url.length > 0) {
+            window.location.href = url;
+            return;
+          }
+          throw new Error('Missing url from /api/checkout');
+        } catch (err) {
+          console.error(err);
+          window.alert('Payment failed. Please try again.');
+        }
       }}
       style={{
         position: "fixed",
