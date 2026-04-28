@@ -144,7 +144,11 @@ export default function Home() {
     </main>
     <button
       type="button"
-      onClick={() => window.open("https://buy.stripe.com/8x200i1CcaS58wGdaE0Ba03", "_blank")}
+      onClick={async () => {
+        const res = await fetch('/api/checkout', { method: 'POST' });
+        const data = await res.json();
+        if (data?.url) window.open(data.url, '_blank');
+      }}
       style={{
         position: "fixed",
         bottom: "120px",
