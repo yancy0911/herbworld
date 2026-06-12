@@ -8,19 +8,19 @@
     "start": "next start",
     "lint": "eslint",
     "radar": "npx tsx cron.ts",
-    "radar:once": "npx tsx -e \"import { config } from 'dotenv'; config({ path: '.env.local' }); import('./services/scraper').then(m => m.runScraper())\""
+    "radar:once": "npx tsx -e \"import { config } from 'dotenv'; config({ path: '.env.local' }); import('./services/scraper').then(m => m.runScraper())\"",
+    "leads:report": "npx tsx scripts/lead_report.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",
-    "@types/better-sqlite3": "^7.6.13",
+    "@neondatabase/serverless": "^1.1.0",
     "@types/node-cron": "^3.0.11",
-    "better-sqlite3": "^12.9.0",
     "dotenv": "^17.4.2",
-    "next": "16.2.4",
+    "next": "^16.2.7",
     "node-cron": "^4.2.1",
+    "openai": "^6.36.0",
     "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "stripe": "^22.1.0"
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

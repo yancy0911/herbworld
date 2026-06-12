@@ -1,9 +1,14 @@
 import { NextRequest } from 'next/server';
-import { getDb, type Lead } from '@/lib/db';
+import { updateLeadStatus } from '@/lib/db';
 
 export const runtime = 'nodejs';
 
-const VALID_STATUSES = new Set(['pending', 'contacted', 'done']);
+const VALID_STATUSES = new Set([
+  'pending', 'reviewing', 'clarifying', 'awaiting_customer',
+  'ready_to_dispatch', 'matching', 'assigned', 'executing',
+  'waiting_third_party', 'completed', 'not_converted', 'cancelled',
+  'long_term_followup',
+]);
 
 export async function PATCH(
   req: NextRequest,
@@ -16,12 +21,9 @@ export async function PATCH(
     return Response.json({ error: '无效的 status 值' }, { status: 400 });
   }
 
-  const db = getDb();
-  const info = db.prepare('UPDATE leads SET status = ? WHERE id = ?').run(status, Number(id));
-  if (info.changes === 0) {
+  const lead = await updateLeadStatus(Number(id), status);
+  if (!lead) {
     return Response.json({ error: '线索不存在' }, { status: 404 });
   }
-
-  const lead = db.prepare('SELECT * FROM leads WHERE id = ?').get(Number(id)) as Lead;
   return Response.json({ lead });
 }

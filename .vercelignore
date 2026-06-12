@@ -1,0 +1,8 @@
+*.log
+*.db
+.env*
+HERBWORLD_VISUAL_BLUEPRINT.html
+auto_cut_prores.sh
+distribute.py
+scripts/
+database/

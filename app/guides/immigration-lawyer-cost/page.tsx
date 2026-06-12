@@ -1,19 +1,13 @@
-export const metadata = {
-    title: '移民律师收费多少钱？',
-    description: '美国移民律师费用指南。',
-  }
-  
-  export default function Page() {
-    return (
-      <main className="max-w-3xl mx-auto px-4 py-12 text-white">
-        <h1 className="text-3xl font-bold mb-6">移民律师收费多少钱？</h1>
-        <ul className="space-y-3 text-gray-300 mt-4">
-          <li>✅ EB2/EB3职业移民：$3,000 – $8,000</li>
-          <li>✅ EB1A杰出人才：$8,000 – $15,000</li>
-          <li>✅ 婚姻绿卡：$3,000 – $5,000</li>
-          <li>✅ H1B transfer：$2,000 – $4,000</li>
-        </ul>
-        <a href="/" className="inline-block mt-8 bg-blue-600 text-white px-6 py-3 rounded-lg">免费咨询 →</a>
-      </main>
-    )
-  }
+import Link from 'next/link';
+
+export const metadata = { title: '移民律师费用说明' };
+
+export default function Page() {
+  return (
+    <main className="mx-auto max-w-3xl px-4 py-12">
+      <h1 className="text-3xl font-bold">移民律师费用说明</h1>
+      <p className="mt-6 leading-8">律师费用取决于案件情况、服务范围和律师安排。本平台不提供费用标准、法律意见或律师推荐保证。聘请前请核验执业资格，并要求书面说明服务范围与费用。</p>
+      <Link href="/" className="mt-8 inline-block underline">返回首页</Link>
+    </main>
+  );
+}
